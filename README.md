@@ -6,7 +6,8 @@ faster and focuses more on the details that are relevant to the developer workin
 
 The component can be used as follows:
 
-import SampleAd from './gpt-ad-debug/SampleAd';
+```
+import SampleAd from './gpt-ad-debug/SampleAd';  // Placeholder for your site's Ad component 
 import AdDebug from './gpt-ad-debug/AdDebug';
 
 ...
@@ -22,6 +23,7 @@ return (
     }
   </>
 )
+```
 
 The SampleAd component is configured to run ads from the DoubleClick test account. 
 
