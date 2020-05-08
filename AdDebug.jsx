@@ -5,7 +5,7 @@
 import * as React from 'react';
 import AdSlotListing from './AdSlotListing';
 import DisplaySlotTargeting from './DisplaySlotTargeting';
-import { isGoogletagLoaded, getAdSlots, getBaseTargeting, getPageTargeting } from './utils';
+import { isGoogletagLoaded, getAdSlots, getPageTargeting } from './utils';
 
 import styles from './AdDebug.module.css';
 

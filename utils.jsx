@@ -1,63 +1,6 @@
-// @flow strict
+// @flow
 
 /* global googletag */
-
-export type PageTargeting = {|
-  PageType?: string,
-  country?: string,
-  detail?: string,
-  geo?: string,
-  loctype?: string,
-  rd?: string,
-  slice?: string,
-  airline?: string,
-  o?: string,
-  d?: string,
-  oregion?: string,
-  dregion?: string,
-  r?: string,
-  drs?: string | string[],
-  hname?: string,
-  pool?: string,
-  /** Device platform (desktop, tablet, or mobile) */
-  platform?: string,
-  /** Page view ID */
-  pv_id?: string,
-  /** Session ID */
-  sess?: string,
-  /** Audience ID(s) */
-  aud_id?: string | string[],
-|};
-
-// Preferred sort order for page targeting, items not spec'd will be at the bottom
-const preferredOrder: PageTargeting = {
-  PageType: '',
-  country: '',
-  detail: '',
-  geo: '',
-  loctype: '',
-  platform: '',
-  rd: '',
-  slice: '',
-  airline: '',
-  o: '',
-  d: '',
-  oregion: '',
-  dregion: '',
-  r: '',
-  drs: '',
-  hname: '',
-  sess: '',
-  pool: '',
-};
-
-// Doubleclick ad content information or N/A
-const getRespValOrNA = id => {
-  if (typeof id === 'number') {
-    return id;
-  }
-  return 'N/A';
-};
 
 /**
  *  We can only run ADebug if the gpt API is loaded
@@ -77,7 +20,7 @@ export const getAdSlots = (): Slot[] => {
 
 /**
  * This creates a prettier string containing the targeting
- * Could be refactored to return html
+ * TODO: refactor to use component
  */
 export const stringifyTargeting = (json: PageTargeting): string => {
   const prettyVals = {};
@@ -98,36 +41,14 @@ export const stringifyTargeting = (json: PageTargeting): string => {
 };
 
 /**
- * Returns the primary targeting for ads on the page: /acct#/site/geo zone
- */
-export const getBaseTargeting = () => {
-  const slotMap = googletag.pubads().getSlotIdMap();
-  if (Object.keys(slotMap).length) {
-    return Object.keys(slotMap)[0].split(/_\d/)[0];
-  }
-  return 'Not set';
-};
-
-/**
- * Returns the page targeting delivered by the ad-context service
+ * Returns the page targeting that has been set in googletag for the page
  */
 export const getPageTargeting = (): string => {
-  let pageTargeting = {};
-
+  const pageTargeting = {};
   // pull targeting from API
   const targetingKeys = googletag.pubads().getTargetingKeys();
-
   targetingKeys.forEach(key => {
     pageTargeting[key] = googletag.pubads().getTargeting(key);
-  });
-
-  pageTargeting = Object.assign(preferredOrder, pageTargeting);
-
-  // Remove unused preferred
-  Object.keys(pageTargeting).forEach(key => {
-    if (pageTargeting[key] === '') {
-      delete pageTargeting[key];
-    }
   });
   return stringifyTargeting(pageTargeting);
 };
