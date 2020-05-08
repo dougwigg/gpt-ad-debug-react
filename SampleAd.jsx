@@ -50,8 +50,6 @@ const SampleAd = ({ width, height, position }: Props) => {
       googletag.pubads().setTargeting(key, pageTargeting[key]);
     });
 
-    debugger;
-
     slot = googletag.defineSlot('/6355419/Travel/Europe/France/Paris', [parseInt(width,10), parseInt(height,10)], elemId);
     slot.setTargeting('pos', position);
     slot.addService(googletag.pubads());
@@ -70,7 +68,7 @@ const SampleAd = ({ width, height, position }: Props) => {
       loadAd(width, height, position);
     });
   
-    // destroy the slot on object on unmount.
+    // destroy the slot object on unmount.
     return () => googletag.destroySlots([slot]);
 
   });
