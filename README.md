@@ -24,3 +24,7 @@ return (
 )
 
 The SampleAd component is configured to run ads from the DoubleClick test account. 
+
+![screenshot](https://user-images.githubusercontent.com/22104323/81356338-f5b90f80-909e-11ea-8b18-5e29efcd449f.png)
+
+
